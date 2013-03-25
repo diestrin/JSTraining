@@ -1,0 +1,123 @@
+article#uses-1.step(data-x="6000")
+	P In Javascript you can find JSON in all the code, to make configurations, read/store some data and even, to create JS Objects.
+		| There’s some restricted words in javascript like “class”, “function”, etc, so you can’t use those words (on older browsers this will broke the code).
+		br
+		br
+		| This is an example using JSON for configuration purpose:
+		br
+		br
+		pre
+			| var car = new Car({
+			|     color: “red”,
+			|     model: “sedan”,
+			|     doors: 4
+			| });
+
+article#uses-2.step(data-x="6000",data-y="2000")
+	p And this is an example using JSON as a data store set:
+	br
+	pre
+		| var Library = {
+		|     name: “Main Library”,
+		|     location: “San Jose”,
+		|     books: [{
+		|         name: “Don Quijote”,
+		|         author: “Miguel de Cervantes Saavedra”,
+		|         year: 1615
+		|     },{
+		|         name: “Cocori”,
+		|         author: “Joaquin Gutierrez”,
+		|         year: 1947
+		|     }]
+		| }
+
+article#uses-3.step(data-x="6000",data-y="4000")
+	P Then you can access to it in 2 different ways:
+	pre 
+		| console.log(Library.name); // Main Library
+		| console.log(Library[“name”]); // Main Library
+
+	br
+	p This 2 ways of accessing a JSON are called dot notation and array notation, and you can mix those as your convenience:
+
+	pre 
+		| console.log(Library.name[“books”][0].name); 
+		| // Don Quijote
+
+	br
+	p The Array notation is useful when you just know the key name in runtime, for example:
+
+	pre 
+		| function getProperty (propertyName) {
+		|     return Library[propertyName];
+		| }
+
+		| getProperty(“name”);
+
+article#uses-4.step(data-x="6000",data-y="6000")
+	p You can also walk for all the keys of an JSON in javascript in this ways:
+
+	pre
+		| for (var key in Library) {
+		|   console.log(key); // ie: name
+		|   console.log(Library[key]); // ie: Main Library
+		| }
+
+	br
+	p A very useful Javascript helper is the native keys method of the Object object:
+
+	pre console.log( Object.keys(Library) ); // 3
+
+article#uses-5.step(data-x="6000",data-y="8000")
+	p Some times, you’ll want a json with an uncommon key name, I’ll need to say that this is bad practice and the good devs try to avoid this as much as they can.
+		| Noramly you can’t do this:
+
+	pre 
+		| var myCssStyle = {
+		|   margin-left: 15 // this will throw an error
+		| };
+		| 
+		|console.log( myCssStyle.margin-left ); 
+		| // This is invalid javascript, 
+		| // you’re trying to subtract 
+		| // the variable left to the 
+		| // variable myCssStyle.margin
+
+article#uses-5-1.step(data-x="6000",data-y="8000")
+	p Instead of the you need to do this:
+
+	pre
+		| var myCssStyle = {
+		|   "margin-left": 15
+		| };
+		| 
+		| console.log( myCssStyle[“margin-left”] ); 
+		| // 15
+
+	p Again, try to avoid this and use camelCase or underscore_syntax
+
+article#uses-6.step(data-x="6000",data-y="10000")
+	p Both, the array notation, and the dot notation works as a getter/setter:
+
+	pre
+		| var myJson = {};
+		| 
+		| myJson.myVar = “foo”;
+		| 
+		| myJson[“yourVar”] = “bar”;
+		| 
+		| console.log( myJson.yourVar ); // bar
+		| console.log( myJson[“myVar”] ); // foo
+
+article#uses-7.step(data-x="6000",data-y="12000")
+	p 
+		strong DON’T 
+		| use a JSON as an array. With javascript, you can easily do this:
+
+	pre
+		| var myJsonArray = {
+		|   "1": "foo",
+		|   "2": "bar"
+		| }
+
+	p The problem is that a JSON structure is slower and heavier than an Array, so if you can use an array instead of a JSON, it will be better. Also you need to think in the way you’ll access to the data, in the iterators you’ll need to do if it’s an array or it’s a JSON structure, but this differs of the use case.

@@ -1,0 +1,31 @@
+$default-prefixes: webkit moz ms o;
+
+@mixin prefix($property, $value, $prefixes: $default-prefixes) {
+	@each $prefix in $prefixes {
+		-#{$prefix}-#{$property}: #{$value};
+	}
+	#{$property}: #{$value};
+}
+
+@mixin prefix-value($property, $value, $prefixes: $default-prefixes){
+	@each $prefix in $prefixes {
+		#{$property}: -#{$prefix}-#{$value};
+	}
+	#{$property}: #{$value};
+}
+
+@mixin align-items($align){
+	@include prefix(align-items, $align);
+}
+
+@mixin display-flex{
+	@include prefix-value(display, flex);
+}
+
+@mixin flex-direction($direction){
+	@include prefix(flex-direction, $direction);
+}
+
+@mixin justify-content($direction){
+	@include prefix(justify-content, $direction);
+}

@@ -1,0 +1,36 @@
+article#syntax-1.step(data-x="4000")
+	p 
+		strong { 
+		| and 
+		strong } 
+		| are for delimit an amount of data and because the entire JSON document is data, all JOSN documents starts and ends its definition with brackets. The data should be a pair of 
+		em key -> value
+		| , the key should be an string delimited by quotes, and the value can be an string, a number, an array or another json. 
+
+article#syntax-1-example.step(data-x="4000")
+	ul
+		li { "hello": "world"}
+			p The pairs of key value should be separated from each other by colons.
+		li {"hello": "world", "foo": "bar"}
+			p If the target language is javascript, you can have more data types for the value, as a regular expression or functions.
+		li {"regex": /regex/gi , "method": function (value) {return value;} }
+
+article#syntax-2.step(data-x="4000",data-y="2000")
+	p
+		strong [ 
+		| and 
+		strong ] 
+		| are for declare lists of any supported kind, separated by a colon ",".
+		br
+		| {"hello": [ "w", "o", "r", "l", "d" ] }
+		| The spaces are ignored so you can format it as you want, in a single line or in multiple lines.
+
+article#syntax-3.step(data-x="4000",data-y="4000")
+	p The strings should be delimited by quotes (simple or double).
+		br
+		| { "hello": 'world' }
+		| If you need to put double quotes inside a string with double quotes, you can scape those: { "hello": "to the \"world\" " }
+	br
+	p The numbers are literals and can be integers, floats, hexadecimals or ocatals:
+		br
+		| { "data": [ 12, 54.2, 0xF3, 065 ] }

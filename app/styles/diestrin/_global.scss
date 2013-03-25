@@ -1,0 +1,82 @@
+@import "compass/css3/images";
+@import "compass/css3/opacity";
+@import "compass/css3/transition";
+
+$palette-red: rgb(182, 47, 51);
+$palette-white: rgb(238, 238, 238);
+
+body {
+	font-family: sans-serif;
+	font-size: 100%;
+	min-height: 740px;
+	@include background(rgb(215, 215, 215) radial-gradient(50% 50%, rgb(240, 240, 240), rgb(190, 190, 190)));
+	$experimental-support-for-svg: true;
+
+	dfn{
+		font-style: italic;
+		border-bottom: 1px dotted black;
+	}
+
+	h2{
+		font-weight: bold;
+		text-align: center;
+	}
+
+	strong{
+		font-weight: bold;
+	}
+
+	em{
+		font-style: italic;
+	}
+
+	ul{
+		list-style: initial;
+		padding-left: 10px;
+	}
+
+	pre{
+		font-family: arial;
+	}
+
+	aside{
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		@include transparent;
+		@include transition(opacity 1s);
+
+		span{
+			margin: 15px;
+			font-size: 1em;
+			color: #333;
+			text-transform: uppercase;
+			font-family: Helvetica;
+			line-height: 3em;
+			vertical-align: bottom;
+		}
+
+		img{
+			margin: 0 15px 15px 0;
+		}
+	}
+
+	&.impress-on-angular {
+		aside{
+			@include opaque;
+		}
+	}
+
+	#menu{
+		ul{
+			li{
+				border: 5px solid gray;
+				border-radius: 10px;
+				display: inline-block;
+				padding: 5px 10px;
+				margin: 5px;
+				width: 220px;
+			}
+		}
+	}
+}

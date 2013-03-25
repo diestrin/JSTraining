@@ -1,0 +1,88 @@
+@import "compass/css3/box-sizing";
+@import "compass/css3/transition";
+@import "compass/css3/opacity";
+@import "compass/layout/sticky-footer";
+@import "compass/css3/transform";
+@import "compass/css3/box-shadow";
+@import "diestrin/helpers";
+
+@include sticky-footer(72px, ".root", ".root-footer", "footer");
+
+.step {
+	font-family: georgia, serif;
+	font-size: 3em;
+	line-height: 1.5;
+	margin: 0;
+	padding: 40px;
+	position: relative;
+	width: 900px;
+	height: 900px;
+
+	@include transparent;
+	@include box-sizing(border-box);
+	@include transition(opacity 1s, background-color 1s);
+
+	.root-content{
+		height: 570px;
+		@include display-flex;
+		@include align-items(center);
+		@include justify-content(center);
+		@include flex-direction(column);
+	}
+
+	header, footer{
+		position: relative;
+		z-index: 100;
+		width: 100%;
+		font-size: 0.8em;
+		font-family: Helvetica;
+		text-transform: uppercase;
+		@include transparent;
+		@include transition(all 1s);
+		@include backface-visibility(hidden);
+		@include apply-origin(500px 0px -500px, true);
+
+	}
+
+	&.present{
+		background-color: rgba(240, 240, 240, 0.8);
+
+		header, footer{
+			@include opaque;
+			@include rotateY(0deg);
+		}
+	}
+
+	header{
+		background-color: $palette-red;
+		color: $palette-white;
+		padding-left: 150px;
+		left: -150px;
+		@include rotateY(-80deg);
+		@include box-shadow(10px 10px 6px -3px rgba(0, 0, 0, 0.4));
+	}
+
+	footer{
+		background-color: $palette-white;
+		color: transparent;
+		background-image: url("../images/angular_logo.png"), 
+			url("../images/digitas_logo.png"),
+			url("../images/bosz_logo.png");
+		background-size: 65px, 60px, 55px;
+		background-position: 5% 5px, 50% 5px, 95% 5px;
+		background-repeat: no-repeat;
+		padding-right: 150px;
+		text-align: right;
+		@include box-shadow(-10px -10px 6px -3px rgba(0, 0, 0, 0.4),
+			1px 1px 6px rgba(0, 0, 0, 0.4));
+		@include rotateY(80deg);
+	}
+
+	&.active {
+		@include opaque;
+	}
+}
+
+@import "steps/logo";
+@import "steps/uses";
+@import "steps/parsing";

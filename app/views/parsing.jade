@@ -1,0 +1,71 @@
+article#parsing-1.step(data-x="8000")
+	p In the early years, when JSON was starting, the easily way to parse it in javascript was with an window.eval function, but that is an insecure method, because it executes all the javascript code son malicious users can edit the eval parameter to hack your code.
+
+	pre 
+		| var myJson = eval(“( {foo:5} )”);
+		| console.log( myJson.foo ); // 5
+
+article#parsing-2.step(data-x="8000",data-y="2000")
+	P The modern browsers (and some old too) have a window.JSON object with 2 methods, parse and stringify
+
+	pre
+		| var myJson = JSON.parse(“{foo:5}”);
+		| console.log( myJson.foo ); // 5
+
+	br
+	p This is supported for IE8+, Firefox3.5+, Opera10.5+, Safari4+, Chrome
+	p In older browsers you can use a polyfil like the JSON2 or JSON3 lib
+
+article#parsing-3.step(data-x="8000",data-y="4000")
+	p The stringify method is for convert a JSON structure into a string, this is useful to send a JSON structure to a server o a flash player, if you use the Object.toString method, all that you’ll get is an "[object Object]" string.
+	br
+	p JSON in Javascript, as the array structures, are passed for reference, not for value, you should take that into account.
+
+article#parsing-3-1.step(data-x="8000",data-y="4000")
+	pre
+		| var foo, bar;
+		| 
+		| foo = bar = {};
+		| 
+		| foo.test = 5;
+		| console.log( bar.test ); // 5
+
+article#parsing-3-2.step(data-x="8000",data-y="4000")
+	pre
+		| var foo = {};
+		| 
+		| function modify (json) {
+		|    json.test = 5;
+		| }
+		| 
+		| modify(foo);
+		| console.log( foo.test ); // 5
+
+article#parsing-3-3.step(data-x="8000",data-y="4000")
+	pre
+		| var foo, bar;
+		| 
+		| foo = {};
+		| bar = {};
+		| 
+		| foo.soo = bar;
+		| bar.test = 5;
+		| 
+		| console.log( foo.soo.test ); // 5
+
+article#parsing-4.step(data-x="8000",data-y="6000")
+	P So you can easily find you in a circular structure, but this is not bad, is a good practice, but you need to know when to use it, also you can’t convert a circular structure into a string.
+
+	pre
+		| var foo = {
+		|     test: 5
+		| };
+		| 
+		| foo.foo = foo;
+		| 
+		| console.log( foo.foo.foo.foo.foo.foo.foo.foo.test ); // 5
+		| console.log(foo); 
+		| // TypeError: Converting circular structure to JSON
+
+	br
+	p And because the JSON structures are a reference and not a copy, this is not a performance issue.
